@@ -42,4 +42,36 @@ class Recipe {
     @required this.complexity,
     @required this.cost,
   });
+
+  String get complexityText {
+    switch (complexity) {
+      case Complexity.Simple:
+        return 'Easy';
+
+      case Complexity.Medium:
+        return 'Medium';
+
+      case Complexity.Difficult:
+        return 'Difficult';
+
+      default:
+        return 'Unknown';
+    }
+  }
+
+  String get costText {
+    switch (cost) {
+      case Cost.Cheap:
+        return 'Cheap';
+
+      case Cost.Fair:
+        return 'Fair';
+
+      case Cost.Expensive:
+        return 'Expensive';
+
+      default:
+        return 'Unknown';
+    }
+  }
 }
