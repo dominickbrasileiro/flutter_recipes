@@ -2,17 +2,24 @@ import 'package:flutter/material.dart';
 
 import '../models/recipe.dart';
 
+import '../utils/app_routes.dart';
+
 class RecipeItem extends StatelessWidget {
   final Recipe recipe;
 
   const RecipeItem({Key key, this.recipe}) : super(key: key);
 
-  void _selectRecipe() {}
+  void _selectRecipe(context) {
+    Navigator.of(context).pushNamed(
+      AppRoutes.RECIPE_DETAILS,
+      arguments: recipe,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: _selectRecipe,
+      onTap: () => _selectRecipe(context),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
