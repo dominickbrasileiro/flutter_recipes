@@ -5,24 +5,42 @@ import '../components/main_drawer.dart';
 import '../models/settings.dart';
 
 class SettingsScreen extends StatefulWidget {
+  final Settings settings;
+  final Function(Settings) onSettingsChanged;
+
+  const SettingsScreen({
+    Key key,
+    @required this.settings,
+    @required this.onSettingsChanged,
+  }) : super(key: key);
+
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  Settings settings = Settings();
+  Settings settings;
+
+  @override
+  void initState() {
+    super.initState();
+    settings = widget.settings;
+  }
 
   Widget _createSwitch({
     String title,
     String subtitle,
     bool value,
-    Function onChanged,
+    Function(bool) onChanged,
   }) {
     return SwitchListTile(
       title: Text(title),
       subtitle: Text(subtitle),
       value: value,
-      onChanged: onChanged,
+      onChanged: (value) {
+        onChanged(value);
+        widget.onSettingsChanged(settings);
+      },
     );
   }
 
