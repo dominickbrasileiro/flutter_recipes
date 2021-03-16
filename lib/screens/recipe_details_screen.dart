@@ -3,6 +3,15 @@ import 'package:flutter/material.dart';
 import '../models/recipe.dart';
 
 class RecipeDetailsScreen extends StatelessWidget {
+  final Function(Recipe) onToggleFavorite;
+  final Function(Recipe) isFavorite;
+
+  const RecipeDetailsScreen({
+    Key key,
+    @required this.onToggleFavorite,
+    @required this.isFavorite,
+  }) : super(key: key);
+
   Widget _createSectionTitle(BuildContext context, String title) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
@@ -85,6 +94,12 @@ class RecipeDetailsScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          isFavorite(recipe) ? Icons.star : Icons.star_border,
+        ),
+        onPressed: () => onToggleFavorite(recipe),
       ),
     );
   }
